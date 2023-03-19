@@ -1,5 +1,5 @@
-import createImageState from './date.js';
+import createPictureStateList from './date.js';
+import initGallery from './gallery.js';
 
-console.log(
-  createImageState()
-);
+
+initGallery(createPictureStateList());
