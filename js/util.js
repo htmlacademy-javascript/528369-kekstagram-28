@@ -4,7 +4,7 @@ export const pickItemFromList = (list) => {
   return list[index];
 };
 
-export const pickIntegerInrange = (min, max) => {
+export const pickIntegerInRange = (min, max) => {
   const value = min + Math.random() * (max - min);
   return Math.round(value);
 };

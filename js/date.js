@@ -1,4 +1,4 @@
-import {pickItemFromList, pickIntegerInrange} from './util.js';
+import {pickItemFromList, pickIntegerInRange} from './util.js';
 
 const DESCRIPTIONS = ['«Пламя и кровь'];
 const MESSEAGE = [
@@ -21,28 +21,31 @@ const NAME = [
 ];
 
 const createCommentState = (id) => {
-  const avatar = `img/avatar-${pickIntegerInrange(1, 6)}.svg`;
+  const avatar = `img/avatar-${pickIntegerInRange(1, 6)}.svg`;
   const message = pickItemFromList(MESSEAGE);
   const name = pickItemFromList(NAME);
   return {id, avatar, message, name};
 };
 
-const createImageState = (id) => {
+const createCommentStateList = (length) => {
+  const list = new Array(length).fill(1);
+
+  return list.map((start, index) => createCommentState(start + index));
+};
+
+
+const createPictureState = (id) => {
   const url = `photos/${id}.jpg`;
   const description = pickItemFromList(DESCRIPTIONS);
-  const likes = pickIntegerInrange(15, 200);
-  const comments = createCommentState(pickIntegerInrange(0, 20));
+  const likes = pickIntegerInRange(15, 200);
+  const comments = createCommentStateList(pickIntegerInRange(0, 20));
 
   return {id, url, description, likes, comments};
 };
 
-const createImageStateList = (length = 25) => {
+const createPictureStateList = (length = 25) => {
   const list = new Array(length).fill(1);
 
-  return list.map((start, index) => createImageState(start + index));
+  return list.map((start, index) => createPictureState(start + index));
 };
-
-
-createImageStateList();
-
-export default createImageStateList;
+export default createPictureStateList;
