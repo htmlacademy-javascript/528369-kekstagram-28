@@ -11,7 +11,7 @@ const pictureTemplate = document.querySelector('#picture');
 /**
  * @type {HTMLElement}
  */
-const popup = document.querySelector('.big-picture')
+const popup = document.querySelector('.big-picture');
 /**
 * @type {PictureState} data
 * @return {HTMLAnchorElement}
@@ -27,11 +27,11 @@ const createPicture = (data) => {
   picture.querySelector('.picture__comments').textContent = String(data.comments.length);
   picture.querySelector('.picture__likes').textContent = String(data.likes);
 
-    picture.addEventListener('click', (event) => {
-      updatePreview(data);
-      openPopup(popup);
-      event.preventDefault();
-    });
+  picture.addEventListener('click', (event) => {
+    updatePreview(data);
+    openPopup(popup);
+    event.preventDefault();
+  });
 
   return picture;
 };
@@ -40,21 +40,19 @@ const createPicture = (data) => {
  * @param {PictureState[]} data
  */
 const renderPictures = (data) => {
- const pictures = gallery.querySelectorAll('.picture');
- const newPictures = data.map(createPicture);
+  const pictures = gallery.querySelectorAll('.picture');
+  const newPictures = data.map(createPicture);
 
- pictures.forEach((picture) => picture.remove());
- gallery.append(...newPictures);
+  pictures.forEach((picture) => picture.remove());
+  gallery.append(...newPictures);
 };
 /**
  *
  * @param {PictureState[]} data
  */
 const initGallery = (data) => {
- // TODO: Sorting
-
- renderPictures(data);
-
+  //TODO: Sorting
+  renderPictures(data);
 };
 
 export default initGallery;

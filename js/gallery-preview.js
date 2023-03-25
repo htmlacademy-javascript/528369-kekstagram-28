@@ -17,7 +17,7 @@ const commentTemplate = discussion.querySelector('.social__comment');
  * @return {HTMLElement}
  */
 const creatComment = (data) =>{
- const comment =
+  const comment =
  /**
   * @type {HTMLLIElement}
   */
@@ -27,7 +27,7 @@ const creatComment = (data) =>{
   comment.querySelector('.social__text').textContent = data.message;
 
   return comment;
-}
+};
 /**
  *
  * @param {PictureState} data
@@ -38,7 +38,7 @@ const updatePreview = (data) => {
   preview.querySelector('.likes-count').textContent = String(data.likes);
 
   discussion.replaceChildren(...data.comments.map(creatComment));
-  console.log(data);
+
 };
 
 export default updatePreview;

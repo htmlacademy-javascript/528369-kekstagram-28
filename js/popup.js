@@ -35,7 +35,7 @@ const openPopup = (popup) => {
   const cancelButton = popup.querySelector('.cancel');
 
   popup.classList.remove('hidden');
-  popup.scroll(0, 0)
+  popup.scroll(0, 0);
   cancelButton.addEventListener('click', onCancelButtonClick);
 
   document.body.classList.add('modal-open');
