@@ -23,7 +23,7 @@ const creatComment = (data) =>{
   */
  (commentTemplate.cloneNode(true));
   comment.querySelector('.social__picture').setAttribute('src', data.avatar);
-  comment.querySelector('.social__picture').setAttribute('src', data.name);
+  comment.querySelector('.social__picture').setAttribute('alt', data.name);
   comment.querySelector('.social__text').textContent = data.message;
 
   return comment;
