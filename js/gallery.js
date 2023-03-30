@@ -53,8 +53,6 @@ const renderPictures = (data) => {
 const initGallery = (data) => {
   //TODO: Sorting
   renderPictures(data);
-  updatePreview(data[1]);
-  openPopup(popup);
 };
 
 export default initGallery;
