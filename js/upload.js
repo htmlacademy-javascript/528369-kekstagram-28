@@ -1,4 +1,5 @@
 import openPopup from './popup.js';
+import updatePreview from './upload-preview.js';
 
 /**
  * @type {HTMLFormElement}
@@ -21,7 +22,6 @@ const pristine = new Pristine(form, {
  */
 
 const addHashTagValidator = (message, validate) => {
-
   pristine.addValidator(form.hashtags, (value) => {
     const tags = value.toLowerCase().split(' ').filter(Boolean);
 
@@ -35,13 +35,16 @@ const addHashTagValidator = (message, validate) => {
 const addDescriptionValidator = (message, validate) => {
   pristine.addValidator (form.description, validate, message);
 };
+
 /**
- *
- * @param {Event} event
+ * @param {Event & {target: HTMLInputElement}} event
  */
 const onFormChange = (event) => {
   if(event.target === form.filename) {
     // TODO изображение
+    const data = event.target.files.item(0);
+
+    updatePreview(data);
     openPopup(popup);
   }
 };
