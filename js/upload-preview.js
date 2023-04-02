@@ -3,6 +3,7 @@ const Scale = {
   MAX: 100,
   STEP: 25
 };
+
 const Effect = {
   NONE: 'none',
   CHROME: 'chrome',
@@ -33,7 +34,7 @@ const effectFormatterMap = {
 /**
  * @param {string} name
  */
-const createSliderOption = (name) =>{
+const createSliderOptions = (name) => {
   const [min, max, step] = effectRangeMap[name];
   const format = {
     to: effectFormatterMap[name],
@@ -49,14 +50,17 @@ const createSliderOption = (name) =>{
     connect: 'lower'
   };
 };
+
 /**
  * @type {HTMLImageElement}
  */
 const picture = document.querySelector('.img-upload__preview img');
+
 /**
  * @type {HTMLFieldSetElement}
  */
 const scaleControl = document.querySelector('.img-upload__scale');
+
 /**
  * @type {HTMLFieldSetElement}
  */
@@ -65,26 +69,28 @@ const effectPicker = document.querySelector('.img-upload__effects');
 /**
  * @type {HTMLInputElement}
  */
-const effectLevel = document.querySelector('effect-level__value');
+const effectLevel = document.querySelector('.effect-level__value');
 
 // @ts-ignore
 const effectSlider = noUiSlider.create(
   document.querySelector('.effect-level__slider'),
-  createSliderOption(Effect.NONE)
+  createSliderOptions(Effect.NONE)
 );
+
 /**
  * @param {number} percent
  */
 const setScale = (percent) => {
-  picture.style.setProperty('transform',`scale(${percent / 100})`);
+  picture.style.setProperty('transform', `scale(${percent / 100})`);
   scaleControl.querySelector('input').setAttribute('value', `${percent}%`);
 };
+
 /**
  * @param {string} name
  */
-const setEffect = (name) =>{
+const setEffect = (name) => {
   picture.setAttribute('class', `effects__preview--${name}`);
-  effectSlider.updateOptions(createSliderOption(name));
+  effectSlider.updateOptions(createSliderOptions(name));
   effectLevel.parentElement.classList.toggle('hidden', name === Effect.NONE);
 };
 
@@ -94,6 +100,7 @@ const setEffect = (name) =>{
 const onScaleControlClick = (event) => {
   const [less, input, more] = scaleControl.querySelectorAll('input, button');
   const value = Number.parseFloat(input.getAttribute('value'));
+
   switch (event.target) {
     case less:
       setScale(Math.max(value - Scale.STEP), Scale.MIN);
@@ -103,19 +110,21 @@ const onScaleControlClick = (event) => {
       break;
   }
 };
+
 /**
  * @param {Event & {target: Element}} event
  */
-const onEffectPickerChange = (event) =>{
+const onEffectPickerChange = (event) => {
   const name = event.target.getAttribute('value');
 
   setEffect(name);
 };
 
-const onEffectSliderUpdate = () =>{
+const onEffectSliderUpdate = () => {
   picture.style.setProperty('filter', effectSlider.get());
-  effectLevel.setAttribute('value', effectSlider.get());
+  effectLevel.setAttribute('value', effectSlider.get(true));
 };
+
 /**
  * @param {File} data
  */
