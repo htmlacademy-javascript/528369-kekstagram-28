@@ -1,10 +1,14 @@
-export const pickItemFromList = (list) => {
-  const index = Math.floor(Math.random() * list.length);
+/**
+ * @param {string} url
+ * @param {RequestInit} [option]
+ * @returns {Promise}
+ */
+export const request = async (url, options) => {
+  const response = await fetch(url, options);
 
-  return list[index];
-};
+  if (!response.ok) {
+    throw new Error(`${response.status}. ${response.statusText}`);
+  }
 
-export const pickIntegerInRange = (min, max) => {
-  const value = min + Math.random() * (max - min);
-  return Math.round(value);
+  return response.json();
 };

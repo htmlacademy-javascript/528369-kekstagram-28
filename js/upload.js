@@ -1,10 +1,13 @@
 import openPopup from './popup.js';
+import openStatusPopup from './status-popup.js';
 import updatePreview from './upload-preview.js';
+import {request} from './util.js';
 
 /**
  * @type {HTMLFormElement}
  */
 const form = document.querySelector('.img-upload__form');
+
 /**
  * @type {HTMLDivElement}
  */
@@ -17,10 +20,9 @@ const pristine = new Pristine(form, {
 });
 
 /**
- *  @param {string} message
+ * @param {string} message
  * @param {(tags: string[]) => boolean} validate
  */
-
 const addHashTagValidator = (message, validate) => {
   pristine.addValidator(form.hashtags, (value) => {
     const tags = value.toLowerCase().split(' ').filter(Boolean);
@@ -28,12 +30,33 @@ const addHashTagValidator = (message, validate) => {
     return validate(tags);
   }, message, 1, true);
 };
+
 /**
  * @param {string} message
  * @param  {(description: string) => boolean} validate
  */
 const addDescriptionValidator = (message, validate) => {
   pristine.addValidator (form.description, validate, message);
+};
+
+const sendFormData = async () => {
+  const url = form.getAttribute('action');
+  const method = form.getAttribute('method');
+  const body = new FormData(form);
+
+  form.submitButton.setAttribute('disabled', '');
+
+  try {
+    await request(url, {method, body});
+
+    form.resetButton.click();
+    openStatusPopup('success');
+
+  } catch (exception) {
+    openStatusPopup('error');
+  }
+
+  form.submitButton.removeAttribute('disabled');
 };
 
 /**
@@ -59,7 +82,9 @@ const onFormReset = () => {
 const onFormSubmit = (event) => {
   event.preventDefault();
 
-  pristine.validate();
+  if(pristine.validate()) {
+    sendFormData();
+  }
 };
 
 addHashTagValidator(
