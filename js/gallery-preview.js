@@ -7,6 +7,7 @@ const preview = document.querySelector('.big-picture__preview');
  * @type {HTMLUListElement}
  */
 const discussion = preview.querySelector('.social__comments');
+
 /**
  * @type {HTMLLIElement}
  */
@@ -21,6 +22,7 @@ const moreButton = preview.querySelector('.comments-loader');
  * @type {PictureState & {commentsTotal: number}}
  */
 let currentData;
+
 /**
  *
  * @param {CommentState} data
@@ -38,6 +40,7 @@ const creatComment = (data) =>{
 
   return comment;
 };
+
 const onMoreButtonClick = () => {
 
   const newComments = currentData.comments.splice(0, 5).map(creatComment);
@@ -46,8 +49,8 @@ const onMoreButtonClick = () => {
   preview.querySelector('.comments-shown').textContent = String(shown);
   discussion.append(...newComments);
   moreButton.classList.toggle('hidden', shown === currentData.commentsTotal);
-
 };
+
 /**
  *
  * @param {PictureState} data
