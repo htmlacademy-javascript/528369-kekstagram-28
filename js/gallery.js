@@ -1,18 +1,22 @@
 import updatePreview from './gallery-preview.js';
 import openPopup from './popup.js';
 import { debounce } from './util.js';
+
 /**
  * @type {HTMLElement}
  */
 const menu = document.querySelector('.img-filters');
+
 /**
  * @type {HTMLElement}
  */
 const gallery = document.querySelector('.pictures');
+
 /**
 * @type {HTMLtemplateElement}
 */
 const pictureTemplate = document.querySelector('#picture');
+
 /**
  * @type {HTMLElement}
  */
@@ -46,8 +50,8 @@ const createPicture = (data) => {
 
   return picture;
 };
+
 /**
- *
  * @param {PictureState[]} data
  */
 const renderPictures = (data) => {
@@ -57,6 +61,7 @@ const renderPictures = (data) => {
   pictures.forEach((picture) => picture.remove());
   gallery.append(...newPictures);
 };
+
 /**
  *
  * @param {MouseEvent & {target: Element}} event

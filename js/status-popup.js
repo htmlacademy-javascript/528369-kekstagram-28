@@ -13,6 +13,7 @@ const onDocumentKeyDown = (event) => {
     event.stopPropagation();
   }
 };
+
 /**
  * @param {MouseEvent & {target: Element, currentTarget: HTMLElement}} event
  */
@@ -23,6 +24,7 @@ const onPopupClick = (event) => {
     document.removeEventListener('keydown', onDocumentKeyDown, true);
   }
 };
+
 /**
  * @param {'success'|'error'} type
  * @param {{title?: string, button?: string}} data
