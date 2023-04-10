@@ -28,7 +28,7 @@ const effectFormatterMap = {
   [Effect.SEPIA]: (value) => `sepia(${value})`,
   [Effect.MARVIN]: (value) => `invert(${value}%)`,
   [Effect.PHOBOS]: (value) => `blur(${value}px)`,
-  [Effect.HEAT]: (value) => `brigtness(${value})`
+  [Effect.HEAT]: (value) => `brightness(${value})`
 };
 
 /**
@@ -114,10 +114,10 @@ const onScaleControlClick = (event) => {
 
   switch (event.target) {
     case less:
-      setScale(Math.max(value - Scale.STEP), Scale.MIN);
+      setScale(Math.max(value - Scale.STEP, Scale.MIN));
       break;
     case more:
-      setScale(Math.min(value + Scale.STEP), Scale.MAX);
+      setScale(Math.min(value + Scale.STEP, Scale.MAX));
       break;
   }
 };
