@@ -1,4 +1,20 @@
-.pristine-error {
+.has-danger {
   position: relative;
-  color: tomato;
+}
+
+.pristine-error {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  z-index: 1;
+  min-width:  450px;
+  padding: 10px;
+  font-weight: bold;
+  background-color: hsla(256, 100%, 34%, 0.9);
+  border-radius: 5px;
+  transform: translate(-50%, 50%);
+}
+
+textarea + .pristine-error {
+  transform: translate(-50%, 36px);
 }
